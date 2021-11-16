@@ -11,16 +11,17 @@ const {NodeSSH} = require ('node-ssh');
 const app = express();
 const ssh = new NodeSSH();
 
-app.listen(3001, () => {console.log('server is listening on port 3001')});
+app.listen(3000, () => {console.log('server is listening on port 3000')});
 
 app.get ('/commande/VMBuild', (req,res) => {
-    ssh.connect({
-        host: '192.168.68.91',
-        Username: 'User',
-        privatekey: '/root/.ssh/id_rsa'
-    })
+        ssh.connect({
+            host: '192.168.68.91',
+            username: 'user',
+            port: 22,
+            password: 'Infra1!game2021',
+          })
     .then(function() {
-        ssh.execCommand(ping).then(function(result) {
+        ssh.execCommand('apt update').then(function(result) {
             res.send(result.stdout);
             console.log(result.stdout);
         })
