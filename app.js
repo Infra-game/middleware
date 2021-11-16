@@ -2,13 +2,27 @@
 const app = express();
 app.listen(3000, () => {console.log('server is listening on port 3000')});
 */
-var health = require('express-ping');
-var express = require('express');
+const express = require('express');
+const fs = require('fs');
+const { hostname } = require('os');
+const path = require ('path');
+const {NodeSSH} = require ('node-ssh');
 
-var app = express();
+const app = express();
+const ssh = new NodeSSH();
 
-app.use(health.ping()); // this is the only addition
-app.use(app.router);
+app.listen(3001, () => {console.log('server is listening on port 3001')});
 
-
-app.listen(3000);
+app.get ('/commande/VMBuild', (req,res) => {
+    ssh.connect({
+        host: '192.168.68.91',
+        Username: 'User',
+        privatekey: '/root/.ssh/id_rsa'
+    })
+    .then(function() {
+        ssh.execCommand(ping).then(function(result) {
+            res.send(result.stdout);
+            console.log(result.stdout);
+        })
+    })
+})
