@@ -1,31 +1,42 @@
-const { query } = require('express');
-const express = require('express');
+const express = require("express");
+const mysql = require("mysql");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+
 const app = express();
-const http = require('http');
-const server = http.createServer(app);
-const { Server } = require("socket.io");
-const io = new Server(server);
-const mysql = require ("mysql");
-
-
-
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '\index.html');
-});
-
-app.get('/users', (req, res) => {
-  
-  res.send('\index.html');
+const port = process.env.PORT || 5000;
+const db = mysql.createPool({
+    connectionLimit : 10,
+    host : 'localhost',
+    user : 'root',
+    password : '',
+    database : 'infragame'
 })
 
-function logger(r)
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET","POST", "DELETE", "PUT"],
+    credentials: true
+}));
+app.use(express.json());
+app.use(cookieParser());
+app.use(express.urlencoded({extended : true}));
+app.use(session({
+    key: "userId",
+    secret: "infragame",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 1000 * 60 * 60 * 24,
+    }
+}));
 
-server.listen(3000, () => {
-  console.log('listening on localhost:3000');
-});
-io.on('connection', (socket) => {
-    socket.on('chat message', (msg) => {
-        console.log('message: ' + msg);
-    });
-});
 
+require("./connexion")(app,db);
+require("./tables/users")(app,db);
+
+app.listen(port, () => {
+  console.log(`Running on port ${port}`);
+
+});
