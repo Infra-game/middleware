@@ -25,5 +25,11 @@ app.get ('/commande/VMBuild', (req,res) => {
             res.send(result.stdout);
             console.log(result.stdout);
         })
+        
+    })
+    io.on('connection', (socket) => {
+        socket.on('chat message', (msg) => {
+            console.log('message: ' + msg);
+        });
     })
 })
