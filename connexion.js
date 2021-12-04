@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const accessTokenSecret = "H&S.Qny^&~D4xQ4enjnUo)or_%r@ke";
+const authenticateJWT = require("./authenticateJWT")
 
 module.exports = (app, db) => {
     app.post("/login", (req, res) => {
@@ -34,5 +35,34 @@ module.exports = (app, db) => {
                 }
             })
         })
+    })
+
+    app.get("/logout", (req, res) => {
+        res.clearCookie("userId");
+        if(req.session) {
+            req.session.destroy((err) => {
+                if(err) {
+                    res.send("Impossible de se déconnecter.")
+                } else {
+                    res.send("Déconnexion.");
+                }
+            })
+        }
+    })
+
+    app.get("/isAdmin", authenticateJWT, (req, res) => {
+        if(req.user.role.toLowerCase()==="admin") {
+            res.json({auth:true})
+        } else {
+            res.json({auth: false, message: "Identifiants administrateurs requis."})
+        }
+    })
+
+    app.get("/isUser", authenticateJWT, (req, res) => {
+        if(req.user.role.toLowerCase()==="user") {
+            res.json({auth:true})
+        } else {
+            res.json({auth: false, message: "Identifiants requis."})
+        }
     })
 }

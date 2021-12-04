@@ -1,4 +1,3 @@
-
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const authenticateJWT = require("../authenticateJWT")
@@ -34,7 +33,6 @@ module.exports = (app,db) => {
                 fullName : req.body.fullName,
                 role : req.body.role
             };
-
 
             bcrypt.hash(params.password, saltRounds, (err, hash) => {
                 if(!err) {
