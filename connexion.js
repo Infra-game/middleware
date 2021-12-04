@@ -1,7 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const accessTokenSecret = "H&S.Qny^&~D4xQ4enjnUo)or_%r@ke";
-const authenticateJWT = require("./authenticateJWT")
+const authenticateJWT = require("./authenticateJWT");
+const saltRounds = 10;
 
 module.exports = (app, db) => {
     app.post("/login", (req, res) => {
@@ -34,6 +35,38 @@ module.exports = (app, db) => {
                     console.log(err);
                 }
             })
+        })
+    })
+
+    app.post("/register", (req,res) => {
+        db.getConnection((err, connection) => {
+            if(err) throw err;
+
+            const params = {
+                email : req.body.email,
+                username : req.body.username,
+                password : req.body.password,
+                role : req.body.role
+            };
+
+            bcrypt.hash(params.password, saltRounds, (err, hash) => {
+                if(err) {
+                    console.log(err);
+                } else {
+                    params.password = hash;
+
+                    connection.query('INSERT INTO users SET ?', params, (err, result) => {
+                        connection.release();
+                        if(!err) {
+                            res.json({error : false, message : "Inscription réussie."})
+                        } else {
+                            res.json({error : true, message : "Inscription echouée."})
+                            console.log(err);
+                        }
+                    })
+                }
+            })
+
         })
     })
 
