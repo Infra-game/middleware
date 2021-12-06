@@ -34,6 +34,7 @@ app.use(session({
 
 
 require("./connexion")(app,db);
+require("./games")(app);
 require("./tables/users")(app,db);
 
 app.listen(port, () => {
