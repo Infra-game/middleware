@@ -33,7 +33,7 @@ module.exports = (app) => {
     })
 
     app.get("/games/:gameName/destroy", (req,res) => {
-        options.url = `${process.env.JENKINS_URL}/job/Prod/job/Remove%20Docker%20test/build?token=123456`
+        options.url = `${process.env.JENKINS_URL}/job/Prod/job/Remove%20Docker%20test/build?token=12345`
         request(options, (err, response) => {
             if(!err) {
                 const statusCode = response.statusCode;
