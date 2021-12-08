@@ -3,14 +3,14 @@ let options = {
     url : "",
     method: 'HEAD',
     auth: {
-        'user': 'JobApi',
-        'pass': '115ab7751cfff403f0848fc529461a4d07'
+        'user': process.env.JOB_USER,
+        'pass': process.env.JOB_TOKEN
     }
 };
 
 module.exports = (app) => {
     app.get("/games/:gameName/start", (req,res) => {    
-        options.url = 'http://192.168.68.91:8080/job/Prod/job/Launch%20Docker%20Test/build?token=12345'
+        options.url = `${process.env.JENKINS_URL}/job/Prod/job/Launch%20Docker%20Test/build?token=12345`
         request(options, (err, response) => {
             if(!err) {
                 const statusCode = response.statusCode;
@@ -33,7 +33,7 @@ module.exports = (app) => {
     })
 
     app.get("/games/:gameName/destroy", (req,res) => {
-        options.url = "http://192.168.68.91:8080/job/Prod/job/Remove%20Docker%20test/build?token=123456"
+        options.url = `${process.env.JENKINS_URL}/job/Prod/job/Remove%20Docker%20test/build?token=12345`
         request(options, (err, response) => {
             if(!err) {
                 const statusCode = response.statusCode;
