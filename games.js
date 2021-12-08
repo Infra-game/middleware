@@ -7,10 +7,9 @@ let options = {
         'pass': process.env.JOB_TOKEN
     }
 };
-
 module.exports = (app) => {
-    app.get("/games/:gameName/start", (req,res) => {    
-        options.url = `${process.env.JENKINS_URL}/job/Prod/job/Launch%20Docker%20Test/build?token=12345`
+    app.get("/games/:gameName/start", (req,res) => {
+        options.url = `${process.env.JENKINS_URL}/job/Prod/job/start-docker-${req.params.gameName}/build?token=12345`
         request(options, (err, response) => {
             if(!err) {
                 const statusCode = response.statusCode;
@@ -31,9 +30,8 @@ module.exports = (app) => {
             }
         });
     })
-
     app.get("/games/:gameName/destroy", (req,res) => {
-        options.url = `${process.env.JENKINS_URL}/job/Prod/job/Remove%20Docker%20test/build?token=12345`
+        options.url = `${process.env.JENKINS_URL}/job/Prod/job/stop-docker-${req.params.gameName}/build?token=12345`
         request(options, (err, response) => {
             if(!err) {
                 const statusCode = response.statusCode;
