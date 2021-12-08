@@ -1,6 +1,5 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const accessTokenSecret = "H&S.Qny^&~D4xQ4enjnUo)or_%r@ke";
 const authenticateJWT = require("./authenticateJWT");
 const saltRounds = 10;
 
@@ -22,7 +21,7 @@ module.exports = (app, db) => {
                     if(result.length > 0) {
                         bcrypt.compare(params.password, result[0].password, (err, response) => {
                             if(response) {
-                                const accessToken = jwt.sign({id: result[0].id, username: result[0].username, role: result[0].role}, accessTokenSecret);
+                                const accessToken = jwt.sign({id: result[0].id, username: result[0].username, role: result[0].role}, process.env.BCRYPT_SECRET);
                                 res.json({error : false, message : "Connexion réussie.", accessToken});
                             } else {
                                 res.json({error: true, message : "Mot de passe incorrect."})
@@ -46,6 +45,7 @@ module.exports = (app, db) => {
                 email : req.body.email,
                 username : req.body.username,
                 password : req.body.password,
+                fullName : req.body.fullName,
                 role : req.body.role
             };
 
@@ -83,19 +83,7 @@ module.exports = (app, db) => {
         }
     })
 
-    app.get("/isAdmin", authenticateJWT, (req, res) => {
-        if(req.user.role.toLowerCase()==="admin") {
-            res.json({auth:true})
-        } else {
-            res.json({auth: false, message: "Identifiants administrateurs requis."})
-        }
-    })
-
-    app.get("/isUser", authenticateJWT, (req, res) => {
-        if(req.user.role.toLowerCase()==="user") {
-            res.json({auth:true})
-        } else {
-            res.json({auth: false, message: "Identifiants requis."})
-        }
+    app.get("/isAuth", authenticateJWT, (req, res) => {
+        res.json({auth : true, role : req.user.role})
     })
 }
