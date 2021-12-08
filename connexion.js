@@ -46,6 +46,7 @@ module.exports = (app, db) => {
                 email : req.body.email,
                 username : req.body.username,
                 password : req.body.password,
+                fullName : req.body.fullName,
                 role : req.body.role
             };
 
@@ -83,19 +84,7 @@ module.exports = (app, db) => {
         }
     })
 
-    app.get("/isAdmin", authenticateJWT, (req, res) => {
-        if(req.user.role.toLowerCase()==="admin") {
-            res.json({auth:true})
-        } else {
-            res.json({auth: false, message: "Identifiants administrateurs requis."})
-        }
-    })
-
-    app.get("/isUser", authenticateJWT, (req, res) => {
-        if(req.user.role.toLowerCase()==="user") {
-            res.json({auth:true})
-        } else {
-            res.json({auth: false, message: "Identifiants requis."})
-        }
+    app.get("/isAuth", authenticateJWT, (req, res) => {
+        res.json({auth : true, role : req.user.role})
     })
 }
