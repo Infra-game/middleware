@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken");
-const accessTokenSecret = "H&S.Qny^&~D4xQ4enjnUo)or_%r@ke";
+
 
 module.exports = authenticateJWT = (req, res, next) => {
     const token = req.headers.authorization;
 
     if (token) {
-        jwt.verify(token, accessTokenSecret, (err, user) => {
+        jwt.verify(token, process.env.BCRYPT_SECRET, (err, user) => {
             if (err) {
                 res.json({error : true, message : "Jeton faux."})
             } else {
