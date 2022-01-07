@@ -10,10 +10,11 @@ const app = express();
 const port = process.env.PORT || 5000;
 const db = mysql.createPool({
     connectionLimit : 10,
-    host : 'localhost',
-    user : 'root',
-    password : '',
-    database : 'infragame'
+    host : 'mysql',
+    port: '3306',
+    user : 'test',
+    password : '9908',
+    database : 'infragame_dev'
 })
 
 app.use(cors({
