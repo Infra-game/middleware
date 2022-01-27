@@ -1,5 +1,6 @@
 const { json } = require('express');
 const request = require('request');
+
 let options = {
     url : "",
     method: 'HEAD',
@@ -8,7 +9,9 @@ let options = {
         'pass': process.env.JOB_TOKEN
     }
 };
+
 module.exports = (app) => {
+    
     app.get("/games/:gameName/start", (req,res) => {
         options.url = `${process.env.JENKINS_URL}/job/Prod/job/start-docker-${req.params.gameName}/build?token=12345`
         request(options, (err, response) => {

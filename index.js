@@ -35,7 +35,7 @@ app.use(session({
     }
 }));
 
-
+require("./monitoring")(app); 
 require("./connexion")(app,db);
 require("./games")(app);
 require("./tables/users")(app,db);
