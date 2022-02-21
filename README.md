@@ -7,7 +7,12 @@ This is the bridge between the website and our backend, it allow data transmissi
 
 ## Start  
 The MiddleWare is always started, you don't have to start it. 
-To run the code, you should use "npm start" on terminal 
+
+To run the code, you should use on terminal 
+```bash 
+npm start
+```
+
 
 
 ## Made with
