@@ -25,11 +25,14 @@ To run the code, you should use "npm start" on terminal
 
 **Latest release :** 
 
-## Authors
+##Contributors 
 
 * **Stephane DUBOZE** _alias_ [@Black-Thor](https://github.com/Black-Thor)
 * **John-Kenneth TAYLOR AFONAH**[@KenTay198](https://github.com/KenTay198)
 * **Mohamed Mehdi GUEMIDI** [@Diabet0](https://github.com/Diabet0)
+* **Idris MEZNAD** [@mezdidis](https://github.com/mezdidis)
+## Authors
+
 * **Idris MEZNAD** [@mezdidis](https://github.com/mezdidis)
 
 
