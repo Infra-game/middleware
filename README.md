@@ -26,7 +26,7 @@ To run the code, you should use "npm start" on terminal
 **Latest release :** 
 
 
-##Contributors 
+## Contributors 
 
 * **Stephane DUBOZE** _alias_ [@Black-Thor](https://github.com/Black-Thor)
 * **John-Kenneth TAYLOR AFONAH**[@KenTay198](https://github.com/KenTay198)
