@@ -7,6 +7,7 @@ This is the bridge between the website and our backend, it allow data transmissi
 
 ## Start  
 The MiddleWare is always started, you don't have to start it. 
+To run the code, you should use "npm start" on terminal 
 
 
 ## Made with
@@ -21,9 +22,10 @@ The MiddleWare is always started, you don't have to start it.
 ## Versions
 
 **Latest stable release :** 
+
 **Latest release :** 
 
-## Auteurs
+## Authors
 
 * **Stephane DUBOZE** _alias_ [@Black-Thor](https://github.com/Black-Thor)
 * **John-Kenneth TAYLOR AFONAH**[@KenTay198](https://github.com/KenTay198)
