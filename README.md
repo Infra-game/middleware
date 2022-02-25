@@ -35,13 +35,13 @@ npm start
 ## Contributors 
 
 * **Stephane DUBOZE** _alias_ [@Black-Thor](https://github.com/Black-Thor)
-* **John-Kenneth TAYLOR AFONAH**[@KenTay198](https://github.com/KenTay198)
-* **Mohamed Mehdi GUEMIDI** [@Diabet0](https://github.com/Diabet0)
-* **Idris MEZNAD** [@mezdidis](https://github.com/mezdidis)
+* **John-Kenneth TAYLOR AFONAH** _alias_ [@KenTay198](https://github.com/KenTay198)
+* **Mohamed Mehdi GUEMIDI** _alias_ [@Diabet0](https://github.com/Diabet0)
+* **Idris MEZNAD** _alias_ [@mezdidis](https://github.com/mezdidis)
 
 
 ## Author
 
-* **Idris MEZNAD** [@mezdidis](https://github.com/mezdidis)
+* **Idris MEZNAD** _alias_ [@mezdidis](https://github.com/mezdidis)
 
 
