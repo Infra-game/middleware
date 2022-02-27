@@ -18,10 +18,8 @@ npm start
 ## Made with
 
 * [Visual Studio Code](https://code.visualstudio.com/) - Text editor
-* [VirtualBox Vms](https://www.virtualbox.org/) - free virtualization software
-* [FortiClient](https://www.fortinet.com/fr/support/product-downloads) - Virtual Private Network (VPN) 
-* [jenkins](https://www.jenkins.io/) - open source automation server
-* [docker](https://www.docker.com/) - platform for running certain applications in software containers
+* [Node JS](https://nodejs.org/en/) - Node.js is a free software platform in JavaScript
+* [Express JS](https://expressjs.com/fr/) - Express.js is a framework for building web applications based on Node.js.
 
 
 
