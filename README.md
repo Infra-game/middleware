@@ -12,7 +12,22 @@ To run the code, you should use on terminal
 ```bash 
 npm start
 ```
+## API ENDPOINT
+```
+List of available API (browseable) at /api
+* /logout
+* /register
+* /login
+* /isAuth
+* /games/:gameName/start
+* /games/:gameName/status
+* /games/:gameName/destroy
+* /monitoring/disk
+* /monitoring/ram
+* /monitoring/load
+* /monitoring/cpu
 
+```
 
 
 ## Made with
