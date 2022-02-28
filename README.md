@@ -12,6 +12,14 @@ To run the code, you should use on terminal
 ```bash 
 npm start
 ```
+
+
+## Made with
+
+* [Visual Studio Code](https://code.visualstudio.com/) - Text editor
+* [Node JS](https://nodejs.org/en/) - Node.js is a free software platform in JavaScript
+* [Express JS](https://expressjs.com/fr/) - Express.js is a framework for building web applications based on Node.js.
+
 ## API ENDPOINT
 ```
 List of available API (browseable) at /api
@@ -28,15 +36,6 @@ List of available API (browseable) at /api
 * /monitoring/cpu
 
 ```
-
-
-## Made with
-
-* [Visual Studio Code](https://code.visualstudio.com/) - Text editor
-* [Node JS](https://nodejs.org/en/) - Node.js is a free software platform in JavaScript
-* [Express JS](https://expressjs.com/fr/) - Express.js is a framework for building web applications based on Node.js.
-
-
 
 ## Versions
 
