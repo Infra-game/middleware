@@ -31,7 +31,7 @@ module.exports = (app,db) => {
                     email : req.body.email,
                     username : req.body.username,
                     password : req.body.password,
-                    fullName : req.body.fullName,
+                    fullname : req.body.fullname,
                     role : req.body.role
                 };
     

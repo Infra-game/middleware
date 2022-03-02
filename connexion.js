@@ -9,14 +9,13 @@ module.exports = (app, db) => {
       if (err) res.json(err);
       else {
         const params = {
-          email: req.body.email,
-          username: req.body.username,
+          auth: req.body.auth,
           password: req.body.password,
         };
 
         connection.query(
-          "SELECT * FROM users WHERE email = ? AND username = ?",
-          [params.email, params.username],
+          "SELECT * FROM users WHERE email = ? OR username = ?",
+          [params.auth, params.auth],
           (err, result) => {
             connection.release();
 
