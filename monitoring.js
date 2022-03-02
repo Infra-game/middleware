@@ -11,12 +11,17 @@ module.exports = (app) => {
    * points = nombre de points max
    * jsonp =  format
    * google_json = format
-   * after => give the time for getting data
+   * after => give the time for getting data (seconds)
    *  */
 
   //get avg  load stats for %
-  app.get("/monitoring/cpu", (req, data) => {
-    options.url = `${process.env.NETDATA_URL}options=nonzero&chart=system.cpu&points=10&format=jsonp&options=google_json&after=-10`;
+  app.post("/monitoring/cpu", (req, data) => {
+    params = {
+      points : req.body.points,
+      after : req.body.after
+    }
+
+    options.url = `${process.env.NETDATA_URL}options=nonzero&chart=system.cpu&points=${params.points}&format=jsonp&options=google_json&after=-${params.after}`;
     request.get(options, (error, response) => {
       if (!error) {
         data.send(response.body);
@@ -26,8 +31,13 @@ module.exports = (app) => {
     });
   });
   //get avg  load stats for %
-  app.get("/monitoring/load", (req, data) => {
-    options.url = `${process.env.NETDATA_URL}options=nonzero&chart=system.load&points=10&format=jsonp&options=google_json&after=-10`;
+  app.post("/monitoring/load", (req, data) => {
+    params = {
+      points : req.body.points,
+      after : req.body.after
+    }
+
+    options.url = `${process.env.NETDATA_URL}options=nonzero&chart=system.load&points=${params.points}&format=jsonp&options=google_json&after=-${params.after}`;
     request.get(options, (error, response) => {
       if (!error) {
         data.send(response.body);
@@ -37,8 +47,13 @@ module.exports = (app) => {
     });
   });
   //get ram  load stats for %
-  app.get("/monitoring/ram", (req, data) => {
-    options.url = `${process.env.NETDATA_URL}options=nonzero&chart=system.ram&points=10&format=jsonp&options=google_json&after=-10`;
+  app.post("/monitoring/ram", (req, data) => {
+    params = {
+      points : req.body.points,
+      after : req.body.after
+    }
+
+    options.url = `${process.env.NETDATA_URL}options=nonzero&chart=system.ram&points=${params.points}&format=jsonp&options=google_json&after=-${params.after}`;
     request.get(options, (error, response) => {
       if (!error) {
         data.send(response.body);
@@ -48,8 +63,13 @@ module.exports = (app) => {
     });
   });
   //get disk  load stats for %
-  app.get("/monitoring/disk", (req, data) => {
-    options.url = `${process.env.NETDATA_URL}options=nonzero&chart=disk.sda&points=10&format=jsonp&options=google_json&after=-10`;
+  app.post("/monitoring/disk", (req, data) => {
+    params = {
+      points : req.body.points,
+      after : req.body.after
+    }
+    
+    options.url = `${process.env.NETDATA_URL}options=nonzero&chart=disk.sda&points=${params.points}&format=jsonp&options=google_json&after=-${params.after}`;
     request.get(options, (error, response) => {
       if (!error) {
         data.send(response.body);
