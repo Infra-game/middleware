@@ -1,0 +1,6 @@
+JOB_USER = JobApi
+JOB_TOKEN = 15ab7751cfff403f0848fc529461a4d07
+
+BCRYPT_SECRET = H&S.Qny^&~D4xQ4enjnUo)or_%r@ke
+
+JENKINS_URL = http://192.168.68.91:8080
