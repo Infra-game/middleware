@@ -43,6 +43,7 @@ require("./monitoring")(app);
 require("./connexion")(app, db);
 require("./games")(app);
 require("./tables/users")(app, db);
+require("./feedBack")(app, db);
 
 app.listen(port, () => {
   console.log(`Running on port ${port}`);
