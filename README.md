@@ -21,21 +21,25 @@ npm start
 * [Express JS](https://expressjs.com/fr/) - Express.js is a framework for building web applications based on Node.js.
 
 ## API ENDPOINT
-```
-List of available API (browseable) at /api
-* /logout
-* /register
-* /login
-* /isAuth
-* /games/:gameName/start
-* /games/:gameName/status
-* /games/:gameName/destroy
-* /monitoring/disk
-* /monitoring/ram
-* /monitoring/load
-* /monitoring/cpu
-
-```
+| Routes                   | Type   | Parameter                                                      | Retour type | Accès user | Accès admin |
+| ------------------------ | ------ | -------------------------------------------------------------- | ----------- | ---------- | ----------- |
+| /logout                  | GET    |                                                                |             | YES        | YES         |
+| /register                | POST   |                                                                |             | YES        | YES         |
+| /login                   | POST   | email , username , password , fullName , role                  |             | YES        | YES         |
+| /isAuth                  | GET    | authenticateJWT                                                |             | YES        | YES         |
+| /games/:gameName/start   | GET    |                                                                |             | YES        | YES         |
+| /games/:gameName/status  | GET    |                                                                |             | YES        | YES         |
+| /games/:gameName/destroy | GET    |                                                                |             | YES        | YES         |
+| /monitoring/disk         | POST   | Points , after                                                 | JSON        | YES        | YES         |
+| /monitoring/ram          | GET    | Points , after                                                 | JSON        | YES        | YES         |
+| /monitoring/load         | POST   | Points , after                                                 | JSON        | YES        | YES         |
+| /monitoring/cpu          | POST   | Points , after                                                 | JSON        | YES        | YES         |
+| /feedback/bugreport      | POST   | bugtype , bugmessage                                           |             | YES        | YES         |
+| /feedback/pendingBug     |        |                                                                | JSON        | YES        | YES         |
+| /users                   | GET    |                                                                | JSON        | NO         | YES         |
+| /users/add               | POST   | email , username , password , fullName , role                  |             | NO         | YES         |
+| /users/:id               | DELETE | authenticateJWT                                                |             |            |             |
+| /users/:id               | PUT    | authenticateJWT , email , username, password , fullName , role | JSON        | NO         | YES         |
 
 ## Versions
 
