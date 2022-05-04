@@ -63,20 +63,4 @@ module.exports = (app) => {
       }
     });
   });
-  //get disk  load stats for %
-  app.post("/monitoring/disk", (req, res) => {
-    params = {
-      points : req.body.points,
-      after : req.body.after
-    }
-
-    options.url = `${process.env.NETDATA_URL}options=nonzero&chart=disk.sda&points=${params.points}&format=json&after=-${params.after}`;
-    request.get(options, (error, response) => {
-      if (!error) {
-        res.send(response.body);
-      } else {
-        res.send(error);
-      }
-    });
-  });
 };

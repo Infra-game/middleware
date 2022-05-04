@@ -1,5 +1,5 @@
-const { json } = require("express");
 const request = require("request");
+const qs = require("qs");
 
 let options = {
   url: "",
@@ -8,11 +8,13 @@ let options = {
     user: process.env.JOB_USER,
     pass: process.env.JOB_TOKEN,
   },
+  data: ""
 };
 
 module.exports = (app) => {
-  app.get("/games/:gameName/start", (req, res) => {
+  app.post("/games/:gameName/start", (req, res) => {
     options.url = `${process.env.JENKINS_URL}/job/Prod/job/start-docker-${req.params.gameName}/build?token=12345`;
+
     request(options, (err, response) => {
       if (!err) {
         const statusCode = response.statusCode;
@@ -23,6 +25,10 @@ module.exports = (app) => {
             break;
           case 401:
             message = "Non autorisé.";
+            break;
+          case 405:
+            message = "Method not allowed";
+            break;
           default:
             break;
         }
@@ -68,4 +74,44 @@ module.exports = (app) => {
       }
     });
   });
+
+  app.post("/testconfig", (req, res) => {
+    let parameters = {
+      "player_num" : "15",
+      "server_name" : req.body.name,
+      "motd" : req.body.motd,
+      "online_mode" : "false",
+      "difficulty" : req.body.difficulty
+    }
+    strParams = "";
+    Object.entries(parameters).forEach((entry) => {
+      strParams+=`&${entry[0]}=${entry[1]}`;
+    });
+    options.url = `${process.env.JENKINS_URL}/job/test-deploy/job/deploy-test-app/buildWithParameters?token=12345${strParams}`;
+
+    request(options, (err, response) => {
+      if (!err) {
+        const statusCode = response.statusCode;
+        let message = "";
+        switch (statusCode) {
+          case 201:
+            message = "Le serveur a été crée.";
+            break;
+          case 401:
+            message = "Non autorisé.";
+            break;
+          case 405:
+            message = "Method not allowed";
+            break;
+          default:
+            break;
+        }
+        res.json({ statusCode, message });
+      } else {
+        res.json({ error: true });
+        console.log(err);
+      }
+    });
+  })
 };
+
