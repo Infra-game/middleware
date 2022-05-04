@@ -70,7 +70,7 @@ module.exports = (app, db) => {
         email: req.body.email,
         username: req.body.username,
         password: req.body.password,
-        fullName: "c moi wsh",
+        fullName: req.body.fullName,
         role: req.body.role,
       };
 

@@ -16,3 +16,4 @@ module.exports = authenticateJWT = (req, res, next) => {
     res.json({ error: true, message: "Aucun jeton fourni." });
   }
 };
+
