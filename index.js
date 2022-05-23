@@ -1,4 +1,4 @@
-require('dotenv').config()
+require("dotenv").config();
 
 const express = require("express");
 const mysql = require("mysql");
@@ -9,37 +9,27 @@ const session = require("express-session");
 const app = express();
 const port = process.env.PORT || 5000;
 const db = mysql.createPool({
-    connectionLimit : 10,
-    host : 'localhost',
-    user : 'root',
-    password : '',
-    database : 'infragame'
-})
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PWD,
+  database: process.env.DB_NAME,
+});
 
-app.use(cors({
-    origin: ["http://localhost:3000"],
-    methods: ["GET","POST", "DELETE", "PUT"],
-    credentials: true
-}));
+app.use(
+  cors({
+    origin: [process.env.ORIGIN],
+    methods: ["GET", "POST", "DELETE", "PUT"],
+    credentials: true,
+  })
+);
 app.use(express.json());
-app.use(cookieParser());
-app.use(express.urlencoded({extended : true}));
-app.use(session({
-    key: "userId",
-    secret: "infragame",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        expires: 1000 * 60 * 60 * 24,
-    }
-}));
 
-
-require("./connexion")(app,db);
+require("./monitoring")(app);
+require("./connexion")(app, db);
 require("./games")(app);
-require("./tables/users")(app,db);
+require("./tables/users")(app, db);
+require("./feedBack")(app, db);
 
 app.listen(port, () => {
   console.log(`Running on port ${port}`);
-
 });

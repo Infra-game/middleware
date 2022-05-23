@@ -59,5 +59,3 @@ npm start
 ## Author
 
 * **Idris MEZNAD** _alias_ [@mezdidis](https://github.com/mezdidis)
-
-
