@@ -76,31 +76,73 @@ module.exports = (app) => {
   });
 
   app.post("/testconfig", (req, res) => {
-    let parameters = {
+    /*let parameters = {
       "player_num" : "15",
       "server_name" : req.body.name,
       "motd" : req.body.motd,
       "online_mode" : "false",
       "difficulty" : req.body.difficulty
+    }*/
+    let parameters = {
+      "FLIGHT" : "true",
+      "NAME" : "mehdi-mc",
+      "MODE" : "Survival",
+      "MOTD" : "Ouais ouais description"
     }
     strParams = "";
     Object.entries(parameters).forEach((entry) => {
       strParams+=`&${entry[0]}=${entry[1]}`;
     });
-    options.url = `${process.env.JENKINS_URL}/job/test-deploy/job/deploy-test-app/buildWithParameters?token=12345${strParams}`;
+    options.url = `${process.env.JENKINS_URL}/job/test-deploy/job/test-k3s-deploy/buildWithParameters?token=12345${strParams}`;
 
+    request(options, (err, response) => {
+      if (!err) {
+        const statusCode = response.statusCode;
+        let message = "";
+        console.log(response.body);
+        switch (statusCode) {
+          case 201:
+            message = "Le serveur a été crée.";
+            break;
+          case 401: //Changer le token de l'utilisateur
+            message = "Non autorisé.";
+            break;
+          case 405: //Vérifier le token du job
+            message = "Method not allowed";
+            break;
+          default:
+            break;
+        }
+        res.json({ statusCode, message });
+      } else {
+        res.json({ error: true });
+        console.log(err);
+      }
+    });
+  })
+
+  app.post("/testdestroy", (req, res) => {
+    let parameters = {
+      "NAME" : "mehdi-mc"
+    }
+    strParams = "";
+    Object.entries(parameters).forEach((entry) => {
+      strParams+=`&${entry[0]}=${entry[1]}`;
+    });
+    options.url = `${process.env.JENKINS_URL}/job/test-deploy/job/delete%20test/buildWithParameters?token=12345${strParams}`;
+  
     request(options, (err, response) => {
       if (!err) {
         const statusCode = response.statusCode;
         let message = "";
         switch (statusCode) {
           case 201:
-            message = "Le serveur a été crée.";
+            message = "Le serveur a été supprimé.";
             break;
-          case 401:
+          case 401: //Changer le token de l'utilisateur
             message = "Non autorisé.";
             break;
-          case 405:
+          case 405: //Vérifier le token du job
             message = "Method not allowed";
             break;
           default:
@@ -114,4 +156,3 @@ module.exports = (app) => {
     });
   })
 };
-

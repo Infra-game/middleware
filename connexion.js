@@ -30,6 +30,7 @@ module.exports = (app, db) => {
                         {
                           id: result[0].id,
                           username: result[0].username,
+                          fullname: result[0].fullname,
                           role: result[0].role,
                         },
                         process.env.BCRYPT_SECRET
@@ -70,7 +71,7 @@ module.exports = (app, db) => {
         email: req.body.email,
         username: req.body.username,
         password: req.body.password,
-        fullName: "c moi wsh",
+        fullname: req.body.fullname,
         role: req.body.role,
       };
 
@@ -94,20 +95,7 @@ module.exports = (app, db) => {
     });
   });
 
-  app.get("/logout", (req, res) => {
-    res.clearCookie("userId");
-    if (req.session) {
-      req.session.destroy((err) => {
-        if (err) {
-          res.send("Impossible de se déconnecter.");
-        } else {
-          res.send("Déconnexion.");
-        }
-      });
-    }
-  });
-
   app.get("/isAuth", authenticateJWT, (req, res) => {
-    res.json({ auth: true, role: req.user.role });
+    res.json({ auth: true, user: req.user });
   });
 };
